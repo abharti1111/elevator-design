@@ -43,13 +43,17 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'log_request_id.middleware.RequestIDMiddleware',
+    'requestlogs.middleware.RequestLogsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'libs.middlewares.close_db_connections.DBConnectionHandler'
 ]
 
 ROOT_URLCONF = 'elevator_design.urls'
@@ -106,6 +110,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Rest framework config
+DEFAULT_RENDERER_CLASSES = (
+    'rest_framework.renderers.JSONRenderer',
+)
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': ('libs.authentication.JWTAuthentication',),
+
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+
+
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
+
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
