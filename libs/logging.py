@@ -25,7 +25,7 @@ class CustomJsonFormatter(json_log_formatter.JSONFormatter):
         extra['lineno'] = record.lineno
         extra['thread'] = record.threadName
         extra['pid'] = record.process
-        extra['application_name'] = "carwash"
+        extra['application_name'] = "elevator_design"
 
         return super(CustomJsonFormatter, self).json_record(message, extra, record)
 
@@ -54,7 +54,7 @@ class RequestResponseFormatter(json_log_formatter.JSONFormatter):
         extra['lineno'] = record.lineno
         extra['thread'] = record.threadName
         extra['pid'] = record.process
-        extra['application_name'] = "carwash"
+        extra['application_name'] = "elevator_design"
 
         return super(RequestResponseFormatter, self).json_record({}, extra, record)
 
@@ -100,7 +100,7 @@ LOGGING = {
             "maxBytes": 50000000,
             "backupCount": 10,
             'formatter': 'req-resp-json',
-            'filename': os.path.join(LOG_DIR, 'carwash_service_' + HOST_NAME + '_django.log'),
+            'filename': os.path.join(LOG_DIR, 'elevator_design_service_' + HOST_NAME + '_django.log'),
             'filters': ['request_id'],
         },
         'exceptions_file': {
@@ -109,7 +109,7 @@ LOGGING = {
             "maxBytes": 50000000,
             "backupCount": 10,
             'formatter': 'json',
-            'filename': os.path.join(LOG_DIR, 'carwash_service_' + HOST_NAME + '_exceptions.log'),
+            'filename': os.path.join(LOG_DIR, 'elevator_design_service_' + HOST_NAME + '_exceptions.log'),
             "encoding": "utf8",
             'filters': ['request_id'],
         },
@@ -119,7 +119,7 @@ LOGGING = {
             "maxBytes": 50000000,
             "backupCount": 10,
             'formatter': 'json',
-            'filename': os.path.join(LOG_DIR, 'carwash_service_' + HOST_NAME + '_primary.log'),
+            'filename': os.path.join(LOG_DIR, 'elevator_design_service_' + HOST_NAME + '_primary.log'),
             'filters': ['request_id'],
         },
         'mail_admins': {
