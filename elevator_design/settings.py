@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
+from rediscluster import RedisCluster
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -128,6 +130,20 @@ REST_FRAMEWORK = {
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
 }
+
+# Redis Setup
+
+STARTUP_NODES = [
+    {"host": env('REDIS_CLUSTER_HOST1'), "port": env('REDIS_CLUSTER_PORT1')},
+    {"host": env('REDIS_CLUSTER_HOST2'), "port": env('REDIS_CLUSTER_PORT2')},
+    {"host": env('REDIS_CLUSTER_HOST3'), "port": env('REDIS_CLUSTER_PORT3')},
+    {"host": env('REDIS_CLUSTER_HOST4'), "port": env('REDIS_CLUSTER_PORT4')},
+    {"host": env('REDIS_CLUSTER_HOST5'), "port": env('REDIS_CLUSTER_PORT5')},
+    {"host": env('REDIS_CLUSTER_HOST6'), "port": env('REDIS_CLUSTER_PORT6')},
+
+]
+REDIS_CONNECTION = RedisCluster(startup_nodes=STARTUP_NODES, decode_responses=True)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
